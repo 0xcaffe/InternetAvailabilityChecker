@@ -4,20 +4,20 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'internet-availability-checker'
 
-    publishedGroupId = 'com.treebo'
+    publishedGroupId = 'pl.khamerski'
     libraryName = 'InternetAvailabilityChecker'
     artifact = 'internetavailabilitychecker'
 
     libraryDescription = 'a library to check if android device has active internet connection or not'
 
-    siteUrl = 'https://github.com/AggarwalAnkit/InternetAvailabilityChecker'
-    gitUrl = 'https://github.com/AggarwalAnkit/InternetAvailabilityChecker.git'
+    siteUrl = 'https://github.com/0xcaffe/InternetAvailabilityChecker'
+    gitUrl = 'https://github.com/0xcaffe/InternetAvailabilityChecker.git'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
-    developerId = 'ankit'
-    developerName = 'Ankit Aggarwal'
-    developerEmail = 'aggarwal.ankit92@yahoo.in'
+    developerId = '0xcaffe'
+    developerName = 'Krzysztof Hamerski'
+    developerEmail = 'krzysztof.hamerski@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -25,14 +25,14 @@ ext {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
-        minSdkVersion 3
-        targetSdkVersion 26
-        versionCode 2
-        versionName "1.0.1"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
