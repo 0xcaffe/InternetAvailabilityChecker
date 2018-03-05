@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'internet-availability-checker'
+    bintrayRepo = 'InternetConnectivityListener'
+    bintrayName = 'InternetAvailabilityChecker'
 
-    publishedGroupId = 'pl.khamerski'
+    publishedGroupId = '0xcaffe'
     libraryName = 'InternetAvailabilityChecker'
     artifact = 'internetavailabilitychecker'
 
