@@ -40,6 +40,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
     private List<WeakReference<InternetConnectivityListener>> mInternetConnectivityListenersWeakReferences;
     private NetworkChangeReceiver mNetworkChangeReceiver;
     private boolean mIsNetworkChangeRegistered = false;
+    private boolean online = false;
 
     private TaskFinished<Boolean> mCheckConnectivityCallback;
 
@@ -201,6 +202,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
     }
 
     private void publishInternetAvailabilityStatus(boolean isInternetAvailable) {
+        online = isInternetAvailable;
         if (mInternetConnectivityListenersWeakReferences == null) {
             return;
         }
@@ -226,5 +228,9 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
         if (mInternetConnectivityListenersWeakReferences.size() == 0) {
             unregisterNetworkChangeReceiver();
         }
+    }
+
+    public boolean isOnline() {
+        return online;
     }
 }
