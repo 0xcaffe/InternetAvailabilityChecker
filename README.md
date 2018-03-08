@@ -11,7 +11,7 @@ I added a couple of modifications.
 
 Get it by adding to your `build.gradle` file:
 ```groovy
-implementation '0xcaffe:internetavailabilitychecker:1.0.3'
+implementation 'com.0xcaffe:internetavailabilitychecker:1.0.5'
 ```
 
 
