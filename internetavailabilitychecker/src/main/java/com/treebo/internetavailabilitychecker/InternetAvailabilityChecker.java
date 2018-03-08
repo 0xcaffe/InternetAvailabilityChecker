@@ -35,6 +35,7 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
 
     private static final Object LOCK = new Object();
     private static volatile InternetAvailabilityChecker sInstance;
+    private volatile boolean taskRunning = false;
 
     private WeakReference<Context> mContextWeakReference;
     private List<WeakReference<InternetConnectivityListener>> mInternetConnectivityListenersWeakReferences;
@@ -186,15 +187,20 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
     }
 
     @Override
-    public void onNetworkChange(boolean isNetworkAvailable) {
+    synchronized public void onNetworkChange(boolean isNetworkAvailable) {
+        if (taskRunning) {
+            return;
+        }
         if (isNetworkAvailable) {
             mCheckConnectivityCallback = new TaskFinished<Boolean>() {
                 @Override
                 public void onTaskFinished(Boolean isInternetAvailable) {
                     mCheckConnectivityCallback = null;
                     publishInternetAvailabilityStatus(isInternetAvailable);
+                    taskRunning = false;
                 }
             };
+            taskRunning = true;
             new CheckInternetTask(mCheckConnectivityCallback).execute();
         } else {
             publishInternetAvailabilityStatus(false);
@@ -202,6 +208,9 @@ public final class InternetAvailabilityChecker implements NetworkChangeReceiver.
     }
 
     private void publishInternetAvailabilityStatus(boolean isInternetAvailable) {
+        if (online == isInternetAvailable) {
+            return;
+        }
         online = isInternetAvailable;
         if (mInternetConnectivityListenersWeakReferences == null) {
             return;

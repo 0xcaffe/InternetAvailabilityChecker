@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 
 import java.lang.ref.WeakReference;
 
@@ -34,27 +33,14 @@ import java.lang.ref.WeakReference;
 
 class NetworkChangeReceiver extends BroadcastReceiver {
 
-    private static final String INET_CONDITION = "inetCondition";
-
     private WeakReference<NetworkChangeListener> mNetworkChangeListenerWeakReference;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
-        int condition = 0;
-        if (bundle != null) {
-            condition = bundle.getInt(INET_CONDITION, 0);
-        }
         NetworkChangeListener networkChangeListener = mNetworkChangeListenerWeakReference.get();
         if (networkChangeListener != null) {
             boolean isConnected = isNetworkConnected(context);
-            if (isConnected) {
-                if (condition > 0) {
-                    networkChangeListener.onNetworkChange(true);
-                }
-            } else {
-                networkChangeListener.onNetworkChange(false);
-            }
+            networkChangeListener.onNetworkChange(isConnected);
         }
     }
 
